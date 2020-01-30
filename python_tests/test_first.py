@@ -27,7 +27,9 @@ class SimpleAndroidTests(unittest.TestCase):
 
     def test_find_elements(self):
         try:
-            self.driver.start_recording_screen()
+            #if self.driver.is_locked():
+            self.driver.unlock()
+            video=self.driver.start_recording_screen()
             el = self.driver.find_element_by_android_uiautomator('new UiSelector().textContains("OK")')
             el.click()
         except Exception as e:
@@ -46,12 +48,19 @@ class SimpleAndroidTests(unittest.TestCase):
         try:
             el = self.driver.find_element_by_android_uiautomator('new UiSelector().textContains("Download")')
             el.click()
+            el = self.driver.find_element_by_android_uiautomator('new UiSelector().textContains("Europe")')
+            el.click()
+            el = self.driver.find_element_by_android_uiautomator('new UiSelector().textContains("Azores")')
+            el.click()
             self.driver.get_screenshot_as_file('/home/stf_user/shot.png')
-            self.driver.stop_recording_screen()
+            sleep(100)
+            #video = self.driver.stop_recording_screen()
+            #self.driver.stop_recording_screen()
+            #self.driver.save_recording_screen('/home/stf_user/video.mp4')
+            #newfile=open('/tmp/video.mp4','wb')
         except Exception as e:
             pass
 
-        sleep(100)
 
 
 if __name__ == '__main__':
